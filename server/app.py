@@ -22,17 +22,17 @@ def messages():
         messages_list = [message.to_dict() for message in messages]
 
         response = make_response(
-            jsonify(messages_list), 
+            jsonify(messages_list),
             200
         )
 
         return response
-    
+
     elif request.method == 'POST':
         data = request.get_json()
         new_message = Message(
           body=data.get("body"),
-          username=data.get("username"),  
+          username=data.get("username"),
         )
         db.session.add(new_message)
         db.session.commit()
@@ -44,7 +44,7 @@ def messages():
             201
         )
         return response
-    
+
 
 
 @app.route('/messages/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
